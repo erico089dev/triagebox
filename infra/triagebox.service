@@ -1,0 +1,21 @@
+# Systemd unit for Triagebox. Install on the VM:
+#   sudo cp infra/triagebox.service /etc/systemd/system/triagebox.service
+#   sudo systemctl daemon-reload && sudo systemctl enable --now triagebox
+# Adjust User and paths if the repo isn't at /home/triagebox/triagebox.
+
+[Unit]
+Description=Triagebox - ticket service
+After=network-online.target tailscaled.service
+Wants=network-online.target
+
+[Service]
+User=triagebox
+WorkingDirectory=/home/triagebox/triagebox
+ExecStart=/home/triagebox/triagebox/.venv/bin/python -m uvicorn app.main:create_app --factory --host 127.0.0.1 --port 8080
+Restart=on-failure
+RestartSec=5
+# Small VM: if whisper runs away, let systemd kill it before it kills the VM
+MemoryMax=700M
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,27 @@
+# Registry of projects that use Triagebox.
+# Copy to apps.yml (gitignored, chmod 600) and generate real tokens:
+#   openssl rand -hex 24
+# The file hot-reloads: adding a project just means adding a block.
+#
+# Scopes:
+#   capture → can create reports (capture clients: iOS shortcut, apps…)
+#   read    → can list/read tickets and audio
+#   write   → can modify tickets (triage)
+# Capture clients only carry capture-only tokens; the dev token
+# (read,write) lives only on your dev machine.
+
+apps:
+  duna:
+    name: "Duna"
+    repo: "github.com/erico089dev/Duna" # informational, for triage
+    tokens:
+      - token: "duna-capture-CHANGEME"
+        scopes: [capture]
+      - token: "duna-dev-CHANGEME"
+        scopes: [capture, read, write]
+
+  # another-app:
+  #   name: "Another app"
+  #   tokens:
+  #     - token: "another-capture-CHANGEME"
+  #       scopes: [capture]

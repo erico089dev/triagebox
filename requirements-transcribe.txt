@@ -1,0 +1,2 @@
+# Solo necesario donde se transcribe (la VM). Pesado: ctranslate2 + modelos.
+faster-whisper>=1.0

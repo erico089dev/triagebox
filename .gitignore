@@ -1,0 +1,13 @@
+# Secretos y datos locales
+.env
+apps.yml
+data/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Backups
+*.tar.gz
