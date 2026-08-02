@@ -14,7 +14,7 @@ processed.
 In the project's local `.env` (gitignored, NEVER commit):
 
 ```bash
-TRIAGEBOX_URL=https://triagebox-vm.<tailnet>.ts.net
+TRIAGEBOX_URL=https://<host>.<tailnet>.ts.net:8443
 TRIAGEBOX_DEV_TOKEN=<token with read,write scopes for this app>
 ```
 
