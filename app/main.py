@@ -195,6 +195,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             "tickets": request.app.state.db.count_by_status(),
             "transcribe": {
                 "enabled": request.app.state.transcriber.enabled,
+                "provider": request.app.state.transcriber.provider,
                 "queue": request.app.state.transcriber.pending(),
             },
         }

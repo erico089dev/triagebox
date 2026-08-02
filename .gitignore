@@ -11,3 +11,6 @@ __pycache__/
 
 # Backups
 *.tar.gz
+
+# Runbook de despliegue personal (no va al repo público)
+infra/NEXT-STEPS-cohosting.md

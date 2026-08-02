@@ -14,7 +14,9 @@ WorkingDirectory=/home/triagebox/triagebox
 ExecStart=/home/triagebox/triagebox/.venv/bin/python -m uvicorn app.main:create_app --factory --host 127.0.0.1 --port 8080
 Restart=on-failure
 RestartSec=5
-# Small VM: if whisper runs away, let systemd kill it before it kills the VM
+# Guard for TRANSCRIBE_PROVIDER=local (faster-whisper): if it runs away, let
+# systemd kill Triagebox before it OOMs the shared VM. With the default groq
+# provider the process stays tiny and never approaches this; harmless to keep.
 MemoryMax=700M
 
 [Install]

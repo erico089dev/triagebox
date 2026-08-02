@@ -45,19 +45,32 @@ python -m uvicorn app.main:create_app --factory --port 8080
 
 Tests: `python -m pytest`
 
-## Production (VM `triagebox-vm`)
+## Production (VM)
 
 ```bash
-pip install -r requirements.txt -r requirements-transcribe.txt
+pip install -r requirements.txt          # groq provider: no heavy ML deps
 sudo cp infra/triagebox.service /etc/systemd/system/ && sudo systemctl enable --now triagebox
 bash infra/deploy.sh               # on each update
 sudo tailscale serve --bg --https=443 http://127.0.0.1:8080
 ```
 
-`requirements-transcribe.txt` (faster-whisper) is only needed where
-transcription actually happens; not needed for development/tests. With
-`WHISPER_ENABLED=false`, audios stay `transcript_status=pending` and get
-processed once it's enabled.
+### Transcription
+
+Two engines, selected by `TRANSCRIBE_PROVIDER`:
+
+- **`groq`** (default) — a small multipart call to Groq's Whisper API. No ML
+  on the VM, tiny RAM; ideal when co-hosting with another service. Set
+  `GROQ_API_KEY` (same account/key as Duna's backend works). Needs only
+  `requirements.txt`.
+- **`local`** — faster-whisper in-process. Needs `pip install -r
+  requirements-transcribe.txt` and enough RAM (`base` int8 + swap on a 1 GB
+  VM). Set `WHISPER_MODEL`.
+
+With `WHISPER_ENABLED=false` the worker doesn't start: audios stay
+`transcript_status=pending` and get processed once it's enabled (nothing is
+lost). If exposing over a tailnet that already uses `:443` for another
+service, give Triagebox its own HTTPS port instead
+(`sudo tailscale serve --bg --https=8443 http://127.0.0.1:8080`).
 
 ## Registering a new project
 

@@ -1,2 +1,4 @@
-# Solo necesario donde se transcribe (la VM). Pesado: ctranslate2 + modelos.
+# Solo para TRANSCRIBE_PROVIDER=local (faster-whisper en la propia VM).
+# Pesado: ctranslate2 + modelos en RAM. Con el proveedor por defecto (groq)
+# NO hace falta instalar esto.
 faster-whisper>=1.0
