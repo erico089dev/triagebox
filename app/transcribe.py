@@ -35,6 +35,7 @@ _MIME_BY_EXT = {
     "mp3": "audio/mpeg",
     "ogg": "audio/ogg",
     "wav": "audio/wav",
+    "webm": "audio/webm",
 }
 
 

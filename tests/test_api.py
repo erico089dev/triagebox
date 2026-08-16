@@ -94,6 +94,16 @@ def test_create_audio_ticket(client):
     assert audio.content == b"fake-audio-bytes"
 
 
+def test_create_audio_ticket_webm(client):
+    resp = client.post(
+        "/api/reports",
+        data={"channel": "pwa"},
+        files={"audio": ("note.webm", b"fake-webm-bytes", "audio/webm")},
+        headers=auth("tok-capture"),
+    )
+    assert resp.status_code == 201, resp.text
+
+
 def test_unsupported_audio_format_415(client):
     resp = client.post(
         "/api/reports",

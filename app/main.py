@@ -32,12 +32,14 @@ EXT_BY_MIME = {
     "audio/opus": "ogg",
     "audio/wav": "wav",
     "audio/x-wav": "wav",
+    "audio/webm": "webm",
 }
 MIME_BY_EXT = {
     "m4a": "audio/mp4",
     "mp3": "audio/mpeg",
     "ogg": "audio/ogg",
     "wav": "audio/wav",
+    "webm": "audio/webm",
 }
 
 
